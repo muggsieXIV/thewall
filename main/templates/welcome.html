@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/logout">Log Out</a>
+    <h1>CodingDojo Wall</h1>
+    <h1>Welcome! {{logged_in_user.first_name}}</h1>
+    <br>
+    <form action="process_message" method="POST">
+        {% csrf_token %}
+        <label for="message">Post a message</label>
+        <textarea name="message" id="message" cols="30" rows="5"></textarea>
+        <input type="hidden" name="user_id">
+        <button>Post a message</button>
+    </form>
+
+    {% for message in all_messages %}
+        <a href="comments" style="text-decoration: none">
+            <h3 style="color: black">{{message.user.first_name}} {{message.user.last_name}} - {{message.created_at}}</h3>
+            <p style="color: black">{{message.message}}</p>
+            <hr>
+        </a>
+    {% endfor %}
+</body>
+</html>
